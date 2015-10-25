@@ -27,18 +27,21 @@ city = {
     }
 }
 
+tmp_list = city.copy()
+
+level = 0
+
 while True:
     print("please choose the following services")
-    print(city.keys())
-    services_top = raw_input()
-    if services_top in city.keys():
-        print("now you choose %s list" %services_top)
-        service_list = city[services_top]
-        print("there are following items to choose:")
-        print(service_list.keys())
-        service_2 = raw_input()
-        print("now you choose %s " %service_2)
+    print(tmp_list.keys())
+    services_choose = raw_input()
+    if services_choose in tmp_list.keys():
+        tmp_list = tmp_list[services_choose]
+        if level == 2:
+            print(tmp_list)
+            break
+        level += 1
     else:
         print("choose error")
-    break
+
 
