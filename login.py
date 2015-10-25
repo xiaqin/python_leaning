@@ -1,4 +1,5 @@
 __author__ = 'xiaqin'
+import os
 
 welcome = '''
     Welcome to the my system...
@@ -26,12 +27,18 @@ err_info = '''
 
 login = False
 
-while True :
+if os.path.isfile("lock"):
+    print("you can not login,account locked!!!")
+
+
+while not os.path.isfile("lock") :
     user_input = raw_input(welcome)
     if user_input.isdigit() == False :
         print "input is not correct"
     else:
         break
+else:
+    quit()
 user_input = int(user_input)
 if user_input == 1:
     count = 0
@@ -58,6 +65,7 @@ if user_input == 1:
             print err_info%(2-count)
             count += 1
     else:
-        print(thanks)
+        print("your count is locked,contact admin")
+        f = open("lock","w")
 else:
     print(thanks)
