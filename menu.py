@@ -33,10 +33,36 @@ level = 0
 
 while True:
     print("please choose the following services")
-    print(tmp_list.keys())
+    for index,value in enumerate(tmp_list.keys()):
+        print index,value
+    print index+1,"back to up layer"
+    print index+2,"quit"
+
+    #check the validity of input
     services_choose = raw_input()
-    if services_choose in tmp_list.keys():
-        tmp_list = tmp_list[services_choose]
+    if services_choose.isdigit():
+        services_choose = int(services_choose)
+        if services_choose >= len(tmp_list)+2:
+            print("choose error,please retry")
+            continue
+    else:
+        print("choose error,please retry")
+        continue
+
+    if services_choose == len(tmp_list):
+        if level == 0:
+            print("top level,cannot back to up")
+            continue
+        else:
+            level -= 1
+            tmp_list = up_list
+            continue
+    if services_choose == len(tmp_list)+1:
+        break
+    key = tmp_list.keys()[services_choose]
+    if key in tmp_list.keys():
+        up_list = tmp_list
+        tmp_list = tmp_list[key]
         if level == 2:
             print(tmp_list)
             break
